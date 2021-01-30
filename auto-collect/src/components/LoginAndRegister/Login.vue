@@ -54,6 +54,7 @@ export default {
         this.$axios
           .post('/login', this.loginForm)
           .then(response => {
+            console.log(response)
             if (response.data.code === 200) {
               this.$message({
                 showClose: true,
@@ -61,6 +62,9 @@ export default {
                 type: 'success',
                 duration: 1000,
                 offset: 60
+              })
+              this.$store.commit('login', {
+                username: response.data.data
               })
               let path = this.$route.query.redirect
               console.log(path)

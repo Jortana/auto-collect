@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.njnu.mapper.TaskMapper">
+    <insert id="addTask" parameterType="task">
+        insert into task_record
+        (task_id, code, task_name, task_describe, collector, start_time, end_time, excepted_number, file_address, completed_number, completed_name)
+        values
+        (#{taskId}, #{code}, #{taskName}, #{taskDescribe}, #{collector}, #{startTime}, #{endTime}, #{exceptedNumber}, #{fileAddress}, 0, '');
+    </insert>
+    <select id="queryTaskByCollector" resultType="task">
+        select task_id, code, task_name, task_describe, collector, start_time, end_time, excepted_number, file_address, completed_number, completed_name from task_record where collector = #{collector};
+    </select>
+    <delete id="removeTask">
+        delete from task_record where task_id = #{taskID};
+    </delete>
+    <update id="updateTask" parameterType="task">
+        update task_record
+        set task_name = #{taskName},
+            task_describe = #{taskDescribe},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            excepted_number = #{exceptedNumber}
+        where task_id = #{taskId};
+    </update>
+    <update id="submitTask" parameterType="task">
+        update task_record
+        set completed_number = completed_number + 1,
+            completed_name = completed_name + '#' + #{completedName}
+        where task_id = #{taskId};
+    </update>
+</mapper>

@@ -92,7 +92,7 @@ main {
   position: absolute;
   top: 20vh;
   z-index: 1;
-  padding: 0 1.5rem 0.2rem 1.5rem;
+  padding: 1.2rem 1.5rem 0 1.5rem;
   background-color: #fff;
   border-radius: 0.8rem;
 }
